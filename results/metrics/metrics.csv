@@ -1,0 +1,5 @@
+model,setting,run,n_gen,lenet_acc_intended,feature_frechet
+VAE,beta=1.0,vae_beta1,10000,0.9265,322.7346676765196
+VAE,beta=0.5,vae_beta05,10000,0.836,392.0501681304836
+DDPM,T=100,ddpm_T100,10000,0.2976,673.3708101044984
+DDPM,T=400,ddpm_T400,10000,0.9171,51.665611354315985
