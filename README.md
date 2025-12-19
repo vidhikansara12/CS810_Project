@@ -174,25 +174,3 @@ If you have a montage script/notebook cell, it writes:
 * `checkpoints/ddpm_T100.pt`, `checkpoints/ddpm_T400.pt`
 
 ---
-
-## Metrics (what do they mean)
-
-### 1) Intended-label accuracy (↑)
-
-Generate conditional samples using label `y`. Classify generated images using LeNet and compute:
-
-* accuracy = fraction of predictions equal to the intended label
-
-This measures **class-consistency** of conditional generation.
-
-### 2) Feature-space Fréchet distance (↓)
-
-Let $f(\cdot)$ be the LeNet penultimate-layer feature extractor. Compute $(\mu_r, \Sigma_r)$ on real MNIST test features and $(\mu_g, \Sigma_g)$ on generated features, then compute:
-
-$$
-d^2 = \|\mu_r - \mu_g\|^2 + \operatorname{Tr}\left(\Sigma_r + \Sigma_g - 2\,(\Sigma_r\Sigma_g)^{1/2}\right)
-$$
-
-Lower indicates generated samples are closer to real MNIST in this task-relevant embedding.
-
----
