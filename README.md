@@ -1,4 +1,3 @@
-````md
 # CS-810 Final Project — VAE vs DDPM on MNIST
 
 **Title:** Comparing Variational and Diffusion Paradigms for Image Generation: An Empirical Study on MNIST  
@@ -52,7 +51,7 @@ Because MNIST is 28×28 (where standard FID can be unstable/uninformative), eval
 ├── make_figures.py
 ├── requirements.txt
 └── README.md
-````
+```
 
 > This repo is designed so outputs live **inside the repo** (`./checkpoints`, `./results`) for easy sharing and grading.
 
@@ -79,6 +78,7 @@ flowchart TD
   F --> K
   J --> L[Figures]
   K --> M[Montage]
+```
 
 ### Model diagrams
 
@@ -107,7 +107,6 @@ flowchart LR
   epshat --> Rev[Reverse update step]
   Rev --> xtm1[xt-1]
 ```
-
 
 ---
 
@@ -188,12 +187,12 @@ This measures **class-consistency** of conditional generation.
 
 ### 2) Feature-space Fréchet distance (↓)
 
-Let `f(·)` be the LeNet penultimate-layer feature extractor. Compute `(μ_r, Σ_r)` on real MNIST test features and `(μ_g, Σ_g)` on generated features, then compute:
+Let $f(\cdot)$ be the LeNet penultimate-layer feature extractor. Compute $(\mu_r, \Sigma_r)$ on real MNIST test features and $(\mu_g, \Sigma_g)$ on generated features, then compute:
 
-```text
-d^2 = ||mu_r - mu_g||^2 + Tr( Sigma_r + Sigma_g - 2 * (Sigma_r Sigma_g)^(1/2) )
+$$
+d^2 = \|\mu_r - \mu_g\|^2 + \operatorname{Tr}\left(\Sigma_r + \Sigma_g - 2\,(\Sigma_r\Sigma_g)^{1/2}\right)
+$$
 
 Lower indicates generated samples are closer to real MNIST in this task-relevant embedding.
 
 ---
-
