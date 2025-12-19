@@ -64,30 +64,22 @@ Because MNIST is 28×28 (where standard FID can be unstable/uninformative), eval
 
 ```mermaid
 flowchart TD
-  A[MNIST dataset] --> B[Train LeNet evaluator]
-  A --> C[Train conditional VAE (beta 1.0 and beta 0.5)]
-  A --> D[Train conditional DDPM (T 100 and T 400)]
-
-  C --> E[Save VAE sample grids and recon grids]
-  D --> F[Save DDPM sample grids]
-
-  C --> G[Generate 10k eval samples per run]
+  A[MNIST] --> B[Train LeNet]
+  A --> C[Train VAE]
+  A --> D[Train DDPM]
+  C --> E[Save VAE grids]
+  D --> F[Save DDPM grids]
+  C --> G[Gen eval samples]
   D --> G
-
-  B --> H[Compute metrics using LeNet]
+  B --> H[Compute metrics]
   G --> H
-
-  H --> I[Write metrics.csv and table_metrics.csv]
-  I --> J[Export plots with make_figures.py]
-  E --> K[Build 2x2 montage]
+  H --> I[Write CSV]
+  I --> J[Make plots]
+  E --> K[Make montage]
   F --> K
+  J --> L[Figures]
+  K --> M[Montage]
 
-  J --> L[fig_lenet_acc.png and fig_feature_frechet.png]
-  K --> M[fig_samples_montage.png]
-
-  L --> N[Final report uses figures and table]
-  M --> N
-```
 ### Model diagrams
 
 #### Conditional VAE (β-ELBO)
@@ -198,9 +190,8 @@ This measures **class-consistency** of conditional generation.
 
 Let `f(·)` be the LeNet penultimate-layer feature extractor. Compute `(μ_r, Σ_r)` on real MNIST test features and `(μ_g, Σ_g)` on generated features, then compute:
 
-[
-d^2 = |\mu_r - \mu_g|^2 + \mathrm{Tr}\left(\Sigma_r + \Sigma_g - 2(\Sigma_r \Sigma_g)^{1/2}\right).
-]
+```text
+d^2 = ||mu_r - mu_g||^2 + Tr( Sigma_r + Sigma_g - 2 * (Sigma_r Sigma_g)^(1/2) )
 
 Lower indicates generated samples are closer to real MNIST in this task-relevant embedding.
 
