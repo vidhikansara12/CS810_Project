@@ -88,7 +88,6 @@ flowchart TD
   L --> N[Final report uses figures and table]
   M --> N
 ```
-
 ### Model diagrams
 
 #### Conditional VAE (β-ELBO)
@@ -118,7 +117,9 @@ flowchart LR
 ```
 
 
-## Reproduce everything via scripts
+---
+
+## Reproduce everything via scripts 
 
 ### 1) Train LeNet evaluator
 
